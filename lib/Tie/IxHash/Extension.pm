@@ -1,12 +1,12 @@
 package Tie::IxHash::Extension;
-$Tie::IxHash::Extension::VERSION = '0.001';
+$Tie::IxHash::Extension::VERSION = '0.002';
 use strict;
 use warnings;
 use List::AllUtils;
 
 {
 package Tie::IxHash;
-$Tie::IxHash::VERSION = '0.001';
+$Tie::IxHash::VERSION = '0.002';
 use constant ERROR_KEY_LENGTH_MISMATCH => "incorrect number of keys";
 
 sub RenameKeys {
@@ -34,7 +34,7 @@ Tie::IxHash::Extension
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 AUTHOR
 

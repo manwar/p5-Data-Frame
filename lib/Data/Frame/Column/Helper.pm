@@ -1,5 +1,5 @@
 package Data::Frame::Column::Helper;
-$Data::Frame::Column::Helper::VERSION = '0.001';
+$Data::Frame::Column::Helper::VERSION = '0.002';
 use strict;
 use warnings;
 
@@ -27,7 +27,7 @@ Data::Frame::Column::Helper
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 AUTHOR
 

@@ -1,5 +1,5 @@
 package Data::Frame::Rlike;
-$Data::Frame::Rlike::VERSION = '0.001';
+$Data::Frame::Rlike::VERSION = '0.002';
 use strict;
 use warnings;
 use Exporter 'import';
@@ -45,7 +45,7 @@ Data::Frame::Rlike
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 AUTHOR
 

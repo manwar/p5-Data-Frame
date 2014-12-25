@@ -1,5 +1,5 @@
 package PDL::Role::Stringifiable;
-$PDL::Role::Stringifiable::VERSION = '0.001';
+$PDL::Role::Stringifiable::VERSION = '0.002';
 use strict;
 use warnings;
 use Moo::Role;
@@ -57,7 +57,7 @@ PDL::Role::Stringifiable
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 AUTHOR
 

@@ -1,6 +1,6 @@
 package Data::Frame;
 # ABSTRACT: data frame implementation
-$Data::Frame::VERSION = '0.001';
+$Data::Frame::VERSION = '0.002';
 use strict;
 use warnings;
 
@@ -255,7 +255,7 @@ Data::Frame - data frame implementation
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 SYNOPSIS
 

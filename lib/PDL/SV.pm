@@ -1,5 +1,5 @@
 package PDL::SV;
-$PDL::SV::VERSION = '0.001';
+$PDL::SV::VERSION = '0.002';
 use strict;
 use warnings;
 
@@ -121,7 +121,7 @@ PDL::SV
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 AUTHOR
 

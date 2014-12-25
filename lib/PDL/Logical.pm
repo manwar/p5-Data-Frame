@@ -1,5 +1,5 @@
 package PDL::Logical;
-$PDL::Logical::VERSION = '0.001';
+$PDL::Logical::VERSION = '0.002';
 use strict;
 use warnings;
 # Enumerable: true, false
@@ -21,7 +21,7 @@ PDL::Logical
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 AUTHOR
 
