@@ -12,6 +12,7 @@ example/iris-data.pl
 lib/Data/Frame.pm
 lib/Data/Frame/Column/Helper.pm
 lib/Data/Frame/Rlike.pm
+lib/Data/Frame/Role/Rlike.pm
 lib/PDL/Factor.pm
 lib/PDL/Logical.pm
 lib/PDL/Role/Enumerable.pm
@@ -24,4 +25,7 @@ t/basic.t
 t/pdl-factor.t
 t/pdl-stringifiable-ext.t
 t/pdl-sv.t
+t/rlike-TODO.t
+t/rlike.t
 t/subset.t
+t/traits.t

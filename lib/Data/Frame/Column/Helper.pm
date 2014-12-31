@@ -1,17 +1,22 @@
 package Data::Frame::Column::Helper;
-$Data::Frame::Column::Helper::VERSION = '0.002';
+$Data::Frame::Column::Helper::VERSION = '0.003';
 use strict;
 use warnings;
 
 use Moo;
 
-has df => ( is => 'rw' ); # isa Data::Frame
+has dataframe => ( is => 'rw' ); # isa Data::Frame
 
 use overload '&{}' => sub ($$) {
 	my $self = shift;
-	sub { $self->df->column(@_); };
+	sub { $self->dataframe->column(@_); };
 };
 
+sub AUTOLOAD {
+	my $self = shift;
+	(my $colname = our $AUTOLOAD) =~ s/^@{[__PACKAGE__]}:://;
+	$self->dataframe->column($colname);
+}
 
 1;
 
@@ -27,7 +32,7 @@ Data::Frame::Column::Helper
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 AUTHOR
 

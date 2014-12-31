@@ -1,6 +1,6 @@
 package Data::Frame;
 # ABSTRACT: data frame implementation
-$Data::Frame::VERSION = '0.002';
+$Data::Frame::VERSION = '0.003';
 use strict;
 use warnings;
 
@@ -33,17 +33,17 @@ use overload (
 }
 
 use Moo;
+with 'MooX::Traits';
+
+sub _trait_namespace { 'Data::Frame::Role' } # override for MooX::Traits
 
 has _columns => ( is => 'ro', default => sub { Tie::IxHash->new; } );
 
 has _row_names => ( is => 'rw', predicate => 1 );
 
-around new => sub {
-	my $orig = shift;
-	my ($class, %args) = @_;
-	my $colspec = delete $args{columns};
-
-	my $self = $orig->(@_);
+sub BUILD {
+	my ($self, $args) = @_;
+	my $colspec = delete $args->{columns};
 
 	if( defined $colspec ) {
 		my @columns =
@@ -52,9 +52,7 @@ around new => sub {
 			: @$colspec;
 		$self->add_columns(@columns);
 	}
-
-	$self;
-};
+}
 
 sub string {
 	my ($self) = @_;
@@ -204,8 +202,10 @@ sub select_rows {
 	my $which = [];
 	if( @which_rest > 1 ) {
 		$which = \@which_rest; # array to arrayref
-	} else {
+	} elsif( @which_rest == 1 ) {
 		$which = $which_rest[0]; # get the first value off
+	} else { # @which_rest == 0
+		$which = pdl []; # Empty PDL
 	}
 
 	$which = PDL::Core::topdl($which); # ensure it is a PDL
@@ -216,14 +216,15 @@ sub select_rows {
 	} 0..$self->number_of_columns-1 ];
 
 	$self->_make_actual_row_names;
-	my $select_df = Data::Frame->new(
+	my $select_df = $self->new(
 		columns => $colspec,
 		_row_names => $self->row_names->dice( $which ) );
+	$select_df;
 }
 
 sub _column_helper {
 	my ($self) = @_;
-	Data::Frame::Column::Helper->new( df => $self );
+	Data::Frame::Column::Helper->new( dataframe => $self );
 }
 
 sub equal {
@@ -234,7 +235,7 @@ sub equal {
 					0..$self->number_of_columns-1;
 			my @colnames = @{ $self->columns };
 			my @colspec = List::AllUtils::mesh( @colnames, @eq_cols );
-			return Data::Frame->new( columns => \@colspec );
+			return $self->new( columns => \@colspec );
 		} else {
 			die "number of columns is not equal: @{[$self->number_of_columns]} != @{[$other->number_of_columns]}";
 		}
@@ -255,7 +256,7 @@ Data::Frame - data frame implementation
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
 
@@ -419,6 +420,8 @@ C<$which>.
 
 This C<Data::Frame> supports PDL's data flow, meaning that changes to the
 values in the child data frame columns will appear in the parent data frame.
+
+If no indices are given, a C<Data::Frame> with no rows is returned.
 
 =head1 SEE ALSO
 

@@ -1,35 +1,23 @@
 package Data::Frame::Rlike;
-$Data::Frame::Rlike::VERSION = '0.002';
+$Data::Frame::Rlike::VERSION = '0.003';
 use strict;
 use warnings;
 use Exporter 'import';
-our @EXPORT_OK = qw(dataframe factor);
+our @EXPORT = qw(dataframe factor);
+
+use Data::Frame;
+use PDL::Factor;
+
+our $_df_rlike_class = Moo::Role->create_class_with_roles( 'Data::Frame',
+	qw(Data::Frame::Role::Rlike));
 
 sub dataframe {
-	Data::Frame->new(@_);
+	$_df_rlike_class->new( columns => \@_ );
 }
 
 sub factor {
 	PDL::Factor->new(@_);
 }
-
-# R-like
-sub rbind {
-	# TODO
-	...
-}
-
-# R-like
-sub subset($&) {
-	# TODO
-	my ($df, $cb) = @_;
-	my $ch = $df->_column_helper;
-	local *_ = \$ch;
-	my $where = $cb->($df);
-	$df->select_rows( $where->which );
-}
-
-*Data::Frame::subset = \&subset;
 
 1;
 
@@ -45,7 +33,7 @@ Data::Frame::Rlike
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 AUTHOR
 

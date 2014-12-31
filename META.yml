@@ -25,7 +25,8 @@ requires:
   Moo: 0
   Moo::Role: 0
   MooX::InsideOut: 0
-  PDL: 0
+  MooX::Traits: 0
+  PDL: 2.007
   PDL::Lite: 0
   Scalar::Util: 0
   Storable: 0
@@ -39,6 +40,7 @@ requires:
   strict: 0
   warnings: 0
 resources:
+  IRC: irc://irc.perl.org/#pdl
   homepage: https://github.com/zmughal/p5-Data-Frame
   repository: https://github.com/zmughal/p5-Data-Frame.git
-version: 0.002
+version: 0.003
